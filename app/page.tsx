@@ -11,6 +11,8 @@ import QuestionFlow from './components/QuestionFlow';
 import ScoreSummary from './components/ScoreSummary';
 import GlassButton from './components/glass/ui/GlassButton';
 import GlassCard from './components/glass/ui/GlassCard';
+import HeroBackground from './components/HeroBackground';
+import LanguageCarousel from './components/LanguageCarousel';
 
 type Question = {
   en: {
@@ -180,91 +182,20 @@ export default function Home() {
     return (
       <>
         <Header />
-        <div className="min-h-screen bg-background text-foreground px-4 py-16">
-          <div className="max-w-5xl mx-auto">
-            <h1 className="text-3xl font-light mb-12 text-center tracking-tight">{t('selectSubject')}</h1>
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
-              {skillCheckData.subjects.map((subject) => (
-                <button
-                  key={subject.subject}
-                  onClick={() => handleSubjectSelect(subject.subject)}
-                  className="p-8 text-center ui-card rounded-md hover:shadow-md transition-all duration-200"
-                >
-                  <div className="flex justify-center mb-6 h-16 items-center">
-                    {subject.subject === 'JavaScript' && (
-                      <div className="w-16 h-16 bg-white/6 rounded-md flex items-center justify-center border border-white/6 p-2.5">
-                        <Image
-                          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-                          alt="JavaScript"
-                          width={48}
-                          height={48}
-                          className="w-full h-full object-contain opacity-90"
-                        />
-                      </div>
-                    )}
-                    {subject.subject === 'TypeScript' && (
-                      <div className="w-16 h-16 bg-blue-50 rounded-md flex items-center justify-center border border-blue-100 p-2.5">
-                        <Image
-                          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
-                          alt="TypeScript"
-                          width={48}
-                          height={48}
-                          className="w-full h-full object-contain opacity-90"
-                        />
-                      </div>
-                    )}
-                    {subject.subject === 'Python' && (
-                      <div className="w-16 h-16 bg-green-50 rounded-md flex items-center justify-center border border-green-100 p-2.5">
-                        <Image
-                          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                          alt="Python"
-                          width={48}
-                          height={48}
-                          className="w-full h-full object-contain opacity-90"
-                        />
-                      </div>
-                    )}
-                    {subject.subject === 'C#' && (
-                      <div className="w-16 h-16 bg-purple-50 rounded-md flex items-center justify-center border border-purple-100 p-2.5">
-                        <Image
-                          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"
-                          alt="C#"
-                          width={48}
-                          height={48}
-                          className="w-full h-full object-contain opacity-90"
-                        />
-                      </div>
-                    )}
-                    {subject.subject === 'Flutter' && (
-                      <div className="w-16 h-16 bg-sky-50 rounded-md flex items-center justify-center border border-sky-100 p-2.5">
-                        <Image
-                          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg"
-                          alt="Flutter"
-                          width={48}
-                          height={48}
-                          className="w-full h-full object-contain opacity-90"
-                        />
-                      </div>
-                    )}
-                    {subject.subject === 'C++' && (
-                      <div className="w-16 h-16 bg-indigo-50 rounded-md flex items-center justify-center border border-indigo-100 p-2.5">
-                        <Image
-                          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
-                          alt="C++"
-                          width={48}
-                          height={48}
-                          className="w-full h-full object-contain opacity-90"
-                        />
-                      </div>
-                    )}
-                  </div>
-                  <h2 className="text-xl font-medium mb-2">{subject.subject}</h2>
-                  <p className="text-sm text-muted">{subject.questions.length} {t('questions')}</p>
-                </button>
-              ))}
-            </div>
-            <div className="text-center">
-              <GlassButton onClick={handleRestart} variant="ghost">
+        <div className="relative min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
+          <HeroBackground />
+          <div className="max-w-5xl mx-auto px-4 py-16 z-10 w-full text-center">
+            <h1 className="text-4xl font-extrabold mb-12 text-center tracking-tight text-white drop-shadow-lg">
+              {t('selectSubject')}
+            </h1>
+            
+            <LanguageCarousel 
+              subjects={skillCheckData.subjects} 
+              onSelect={handleSubjectSelect} 
+            />
+
+            <div className="text-center mt-12">
+              <GlassButton onClick={handleRestart} variant="ghost" className="px-8 py-3 text-white border-white/10 hover:bg-white/5">
                 {t('generateNewQuestions')}
               </GlassButton>
             </div>
